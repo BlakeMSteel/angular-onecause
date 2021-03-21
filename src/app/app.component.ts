@@ -13,20 +13,19 @@ export class AppComponent {
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   onSubmit(): void {
-    var now = new Date().getTime();
+    var hours = new Date().getHours().toString().padStart(2, '0');
+    var minutes = new Date().getMinutes().toString().padStart(2, '0');
     this.http
-      .post(
-        'https://cors-anywhere.herokuapp.com/http://localhost:8000/auth',
-        this.loginForm.value,
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          },
-        }
-      )
+      .post('http://localhost:8000/auth', this.loginForm.value, {
+        headers: {
+          Authorization: hours + minutes,
+        },
+      })
       .subscribe(
-        (data) => console.log(data),
-        (err) => console.log(err),
+        () => {
+          window.location.href = 'http://onecause.com';
+        },
+        (err) => alert('There was an error: ' + err.message),
         () => console.log('finished')
       );
     console.log(this.loginForm.value);
