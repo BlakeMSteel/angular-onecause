@@ -12,6 +12,13 @@ export class AppComponent {
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
+  /* Tests:
+  (i'd have to set up a dummy post request reciever for these)
+  - the token is the current utc HHMM
+  - verify the object being sent contains the correct username / password
+  - on success, verify redirection happens
+  - on failure, verify alert happens
+  */
   onSubmit(): void {
     var hours = new Date().getUTCHours().toString().padStart(2, '0');
     var minutes = new Date().getUTCMinutes().toString().padStart(2, '0');
