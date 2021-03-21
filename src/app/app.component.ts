@@ -13,10 +13,10 @@ export class AppComponent {
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
   onSubmit(): void {
-    var hours = new Date().getHours().toString().padStart(2, '0');
-    var minutes = new Date().getMinutes().toString().padStart(2, '0');
+    var hours = new Date().getUTCHours().toString().padStart(2, '0');
+    var minutes = new Date().getUTCMinutes().toString().padStart(2, '0');
     this.http
-      .post('http://localhost:8000/auth', this.loginForm.value, {
+      .post('http://localhost:8000/', this.loginForm.value, {
         headers: {
           Authorization: hours + minutes,
         },
